@@ -1,4 +1,4 @@
-import { ChatWithFile } from "@/components/ChatWithFile";
+import ChatWithFile from "../components/ChatWithFile";
 
 export default function SkillPage() {
   return (
