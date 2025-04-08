@@ -1,6 +1,6 @@
 "use client";
-
 import { useState } from "react";
+import { extractSkillsFromText } from "@/lib/nlp-engine";
 
 const ChatWithFile = () => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -11,8 +11,18 @@ const ChatWithFile = () => {
     setInput("");
   };
 
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const text = await file.text();
+
+    const skills = extractSkillsFromText(text);
+    const summary = JSON.stringify(skills, null, 2);
+    setMessages([...messages, summary]);
+  };
+
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 p-4">
       <input
         type="text"
         className="border p-2 w-full"
@@ -27,15 +37,15 @@ const ChatWithFile = () => {
         送信
       </button>
 
+      <input type="file" className="mt-4" onChange={handleFile} />
+
       <div className="mt-4 space-y-1">
         {messages.map((msg, idx) => (
-          <div key={idx} className="bg-gray-100 p-2 rounded">
+          <div key={idx} className="bg-gray-100 p-2 rounded whitespace-pre-wrap">
             {msg}
           </div>
         ))}
       </div>
-
-      <input type="file" className="mt-4" />
     </div>
   );
 };
