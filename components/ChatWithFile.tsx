@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export const ChatWithFile = () => {
+const ChatWithFile = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
 
@@ -20,13 +20,18 @@ export const ChatWithFile = () => {
         onChange={(e) => setInput(e.target.value)}
         placeholder="最近何やってた？"
       />
-      <button className="bg-blue-500 text-white px-4 py-1 rounded" onClick={sendMessage}>
+      <button
+        className="bg-blue-500 text-white px-4 py-1 rounded"
+        onClick={sendMessage}
+      >
         送信
       </button>
 
       <div className="mt-4 space-y-1">
         {messages.map((msg, idx) => (
-          <div key={idx} className="bg-gray-100 p-2 rounded">{msg}</div>
+          <div key={idx} className="bg-gray-100 p-2 rounded">
+            {msg}
+          </div>
         ))}
       </div>
 
@@ -34,3 +39,5 @@ export const ChatWithFile = () => {
     </div>
   );
 };
+
+export default ChatWithFile;
