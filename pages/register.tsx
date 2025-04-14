@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { Button } from "@/components/ui/button"
-import { JobCard } from "../components/register/JobCard"
+import { JobCard } from "@/components/register/JobCard"
 
 const jobCategories = [
   {
